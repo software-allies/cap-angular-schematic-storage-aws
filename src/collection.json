@@ -3,7 +3,7 @@
   "schematics": {
     "cap-angular-schematic-storage-aws": {
       "description": "A blank schematic.",
-      "factory": "./cap-angular-schematic-storage-aws/index#capAngularSchematicStorageAws",
+      "factory": "./cap-angular-schematic-storage-aws/index",
       "schema": "./cap-angular-schematic-storage-aws/schema.json"
     }
   }
