@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "cap-angular-schematic-storage-aws": {
+      "description": "A blank schematic.",
+      "factory": "./cap-angular-schematic-storage-aws/index#capAngularSchematicStorageAws",
+      "schema": "./cap-angular-schematic-storage-aws/schema.json"
+    }
+  }
+}
