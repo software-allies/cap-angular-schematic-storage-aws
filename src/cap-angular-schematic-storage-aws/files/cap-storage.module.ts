@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { StorageService } from './services/storage.service';
 
-import { ModuleWithProviders } from '@angular/compiler/src/core';
+// import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { ConfigService, IConfigService } from './services/config-general.service';
 import { CommonModule } from '@angular/common';
 import { CapFileUploadComponent } from './components/photo-upload/cap-file-upload.component';
