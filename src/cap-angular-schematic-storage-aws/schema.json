@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsAWS",
+  "title": "CAP AWS Schema",
+  "type": "object",
+  "properties": {
+    "bucket": {
+      "type": "string",
+      "description": "Bucket's name",
+      "x-prompt": "Bucket's name: "
+    },
+    "accessKeyId": {
+      "type": "string",
+      "description": "Access Key Id",
+      "x-prompt": "Access Key Id: "
+    },
+    "secretAccessKey": {
+      "type": "string",
+      "description": "Secret Access Key",
+      "x-prompt": "Secret Access Key: "
+    },
+    "region": {
+      "type": "string",
+      "description": "Region",
+      "x-prompt": "Region: "
+    },
+    "folder": {
+      "type": "string",
+      "description": "Folder",
+      "x-prompt": "Folder: "
+    }
+  },
+  "required": [
+    "bucket",
+    "accessKeyId",
+    "secretAccessKey",
+    "region",
+    "folder"
+  ]
+}
