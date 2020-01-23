@@ -19,11 +19,11 @@ export class ConfigService {
     
     constructor(@Optional() config: IConfigService) {
         if (config) {
-            this.bucket = '<%= bucket %>';//config.bucket;
-            this.accessKeyId = '<%= accessKeyId %>';//config.accessKeyId;
-            this.secretAccessKey = '<%= secretAccessKey %>';//config.secretAccessKey;
-            this.region = '<%= region %>';//config.region;
-            this.folder = '<%= folder %>';//config.folder;
+            this.bucket = config.bucket;
+            this.accessKeyId = config.accessKeyId;
+            this.secretAccessKey = config.secretAccessKey;
+            this.region = config.region;
+            this.folder = config.folder;
         }
     }
 }

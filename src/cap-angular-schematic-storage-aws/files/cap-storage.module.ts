@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders } from '@angular/core';
 
 import { StorageService } from './services/storage.service';
 
@@ -32,15 +32,15 @@ import { NgxFileDropModule } from 'ngx-file-drop';
   ]
 })
 export class CapStorageAWS {
-  // static forRoot(config: IConfigService): ModuleWithProviders {
-  //   return {
-  //     ngModule: CapStorageAWS,
-  //     providers: [
-  //       {
-  //         provide: ConfigService,
-  //         useValue: config
-  //       }
-  //     ]
-  //   }
-  // }
+  static forRoot(config: IConfigService): ModuleWithProviders {
+    return {
+      ngModule: CapStorageAWS,
+      providers: [
+        {
+          provide: ConfigService,
+          useValue: config
+        }
+      ]
+    }
+  }
 }
