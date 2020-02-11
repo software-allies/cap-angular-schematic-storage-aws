@@ -7,27 +7,47 @@
     "bucket": {
       "type": "string",
       "description": "Bucket's name",
-      "x-prompt": "Bucket's name: "
+      "x-prompt": "Bucket's name: ",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
     },
     "accessKeyId": {
       "type": "string",
       "description": "Access Key Id",
-      "x-prompt": "Access Key Id: "
+      "x-prompt": "Access Key Id: ",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
     },
     "secretAccessKey": {
       "type": "string",
       "description": "Secret Access Key",
-      "x-prompt": "Secret Access Key: "
+      "x-prompt": "Secret Access Key: ",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      }
     },
     "region": {
       "type": "string",
       "description": "Region",
-      "x-prompt": "Region: "
+      "x-prompt": "Region: ",
+      "$default": {
+        "$source": "argv",
+        "index": 3
+      }
     },
     "folder": {
       "type": "string",
       "description": "Folder",
-      "x-prompt": "Folder: "
+      "x-prompt": "Folder: ",
+      "$default": {
+        "$source": "argv",
+        "index": 4
+      }
     }
   },
   "required": [
