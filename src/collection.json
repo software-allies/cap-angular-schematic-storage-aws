@@ -2,8 +2,13 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "cap-angular-schematic-storage-aws": {
-      "description": "A blank schematic.",
+      "description": "Schematics to upload images using AWS S3.",
       "factory": "./cap-angular-schematic-storage-aws/index",
+      "schema": "./cap-angular-schematic-storage-aws/schema.json"
+    },
+    "ng-add": {
+      "factory": "./ng-add/index",
+      "description": "Schematics to upload images using AWS S3.",
       "schema": "./cap-angular-schematic-storage-aws/schema.json"
     }
   }
