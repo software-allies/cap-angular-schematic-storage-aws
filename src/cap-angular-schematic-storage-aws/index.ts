@@ -1,6 +1,5 @@
 import { apply, MergeStrategy, mergeWith, Rule, move, SchematicContext, Tree, template, url, chain, noop, forEach, FileEntry, SchematicsException } from '@angular-devkit/schematics';
 import { getWorkspace, getAppModulePath, addImportToModule } from 'schematics-utilities';
-
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import {
   addPackageJsonDependency,
@@ -10,7 +9,7 @@ import {
 } from 'schematics-utilities';
 import { getProjectMainFile, getSourceFile } from 'schematics-utilities/dist/cdk';
 import { normalize, join } from '@angular-devkit/core';
-import { InsertChange } from '@schematics/angular/utility/change';
+// import { InsertChange } from '@schematics/angular/utility/change';
 
 export function setupOptions(host: Tree, options: any): Tree {
   const workspace = getWorkspace(host);
@@ -22,6 +21,26 @@ export function setupOptions(host: Tree, options: any): Tree {
   options.path = join(normalize(project.root), 'src/app/modules/cap-storage-aws');
   return host;
 }
+
+function addGlobalToPolyfills() {
+  return (tree: Tree) => {
+    let polifyllsPath = 'src/polyfills.ts';
+    const buffer = tree.read(polifyllsPath);
+    console.log('buffer: ', buffer);
+    if (buffer === null) {
+      throw new SchematicsException('Could not find polifulls.ts');
+    }
+    const polyfil: string = JSON.parse(JSON.stringify(buffer.toString()));
+    let polifyllContent = polyfil;
+    polifyllContent = polyfil + '\n\n (window as any).global = window; \n\n'
+    console.log('polifyllContent: ', polifyllContent);
+
+
+    tree.overwrite(polifyllsPath, polifyllContent);
+    return tree;
+  }
+}
+
 
 export function capAngularSchematicStorageAws(_options: any): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -48,9 +67,9 @@ export function capAngularSchematicStorageAws(_options: any): Rule {
 export function addPackageJsonDependencies(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [
-      { type: NodeDependencyType.Default, version: '~2.606.0', name: 'aws-sdk' },
-      { type: NodeDependencyType.Default, version: '~8.0.8', name: 'ngx-file-drop' },
-      { type: NodeDependencyType.Default, version: '~13.5.0', name: '@types/node' },
+      { type: NodeDependencyType.Default, version: '~3.0.3', name: 'cap-storage-aws' },
+      // { type: NodeDependencyType.Default, version: '~8.0.8', name: 'ngx-file-drop' },
+      // { type: NodeDependencyType.Default, version: '~13.5.0', name: '@types/node' },
     ];
 
     dependencies.forEach(dependency => {
@@ -81,7 +100,7 @@ function addModuleToImports(options: any): Rule {
     );
     const modulePath = getAppModulePath(host, getProjectMainFile(project));
     const moduleName = 'CapStorageAWS';
-    addToRootModule(host, modulePath, moduleName, './modules/cap-storage-aws/cap-storage.module', options)
+    addToRootModule(host, modulePath, moduleName, 'cap-storage-aws', options)
     return host;
   };
 }
@@ -91,11 +110,12 @@ export default function (options: any): Rule {
     options && options.skipModuleImport ? noop() : capAngularSchematicStorageAws(options),
     options && options.skipPackageJson ? noop() : addPackageJsonDependencies(),
     options && options.skipPackageJson ? noop() : installPackageJsonDependencies(),
+    options && options.skipPolifills ? noop() : addGlobalToPolyfills(),
     options && options.skipModuleImport ? noop() : addModuleToImports(options),
   ]);
 }
 
-export function addToRootModule(host: Tree, modulePath: string, moduleName: string, src: string,  options?:any) {
+export function addToRootModule(host: Tree, modulePath: string, moduleName: string, src: string, options?: any) {
 
   const moduleSource = getSourceFile(host, modulePath);
 
@@ -104,22 +124,23 @@ export function addToRootModule(host: Tree, modulePath: string, moduleName: stri
   }
 
   const changes = addImportToModule(moduleSource as any, modulePath, moduleName, src);
+  console.log('changes: ', changes);
   let recorder = host.beginUpdate(modulePath);
 
   changes.forEach((change: any) => {
-    if (change instanceof InsertChange) {
-      if (change.toAdd === ',\n    CapStorageAWS') {
-        change.toAdd = `,\n    CapStorageAWS.forRoot({
+    // if (change instanceof InsertChange) {
+    if (change.toAdd === ',\n    CapStorageAWS') {
+      change.toAdd = `,\n    CapStorageAWS.forRoot({
         bucket: '${options.bucket}',
         accessKeyId: '${options.accessKeyId}',
         secretAccessKey: '${options.secretAccessKey}',
         region: '${options.region}',
         folder: '${options.folder}'
         })`;
-      }
-      recorder.insertLeft(change.pos, change.toAdd);
-
     }
+    recorder.insertLeft(change.pos, change.toAdd);
+
+    // }
   });
   host.commitUpdate(recorder);
 
