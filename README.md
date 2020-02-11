@@ -36,7 +36,8 @@ If you have some problems with the npm dependency you can also resolve these iss
 Write the following command:
 
 ``` 
-npm install cap-storage-aws
+ng add cap-angular-schematic-storage-aws
+
 ```
 
 ## **AWS S3 Configuration**
