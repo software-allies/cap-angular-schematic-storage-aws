@@ -26,16 +26,12 @@ function addGlobalToPolyfills() {
   return (tree: Tree) => {
     let polifyllsPath = 'src/polyfills.ts';
     const buffer = tree.read(polifyllsPath);
-    console.log('buffer: ', buffer);
     if (buffer === null) {
       throw new SchematicsException('Could not find polifulls.ts');
     }
     const polyfil: string = JSON.parse(JSON.stringify(buffer.toString()));
     let polifyllContent = polyfil;
     polifyllContent = polyfil + '\n\n (window as any).global = window; \n\n'
-    console.log('polifyllContent: ', polifyllContent);
-
-
     tree.overwrite(polifyllsPath, polifyllContent);
     return tree;
   }
@@ -124,7 +120,6 @@ export function addToRootModule(host: Tree, modulePath: string, moduleName: stri
   }
 
   const changes = addImportToModule(moduleSource as any, modulePath, moduleName, src);
-  console.log('changes: ', changes);
   let recorder = host.beginUpdate(modulePath);
 
   changes.forEach((change: any) => {
