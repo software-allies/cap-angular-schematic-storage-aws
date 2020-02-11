@@ -1,7 +1,7 @@
 {
   "name": "cap-angular-schematic-storage-aws",
-  "version": "1.0.0",
-  "description": "A blank schematics",
+  "version": "1.0.1",
+  "description": "Schematics to upload images using AWS S3.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine src/**/*_spec.js"
@@ -10,6 +10,12 @@
     "schematics"
   ],
   "author": "Diego SanMo",
+  "name": "Diego SanMo",
+  "url": "https://github.com/DiegoSanMo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/software-allies/cap-angular-schematic-storage-aws/tree/feature/package-from-npm"
+  },
   "license": "MIT",
   "schematics": "./src/collection.json",
   "dependencies": {
@@ -20,7 +26,8 @@
     "@schematics/angular": "^8.3.23",
     "@types/jasmine": "^3.0.0",
     "@types/node": "^8.0.31",
-    "jasmine": "^3.0.0"
+    "jasmine": "^3.0.0",
+    "schematics-utilities": "^2.0.1"
   },
   "devDependencies": {
     "schematics-utilities": "^2.0.1",
