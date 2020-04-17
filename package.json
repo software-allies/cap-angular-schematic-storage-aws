@@ -1,13 +1,17 @@
 {
   "name": "cap-angular-schematic-storage-aws",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Schematics to upload images using AWS S3.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine src/**/*_spec.js"
   },
   "keywords": [
-    "schematics"
+    "AWS S3",
+    "Amazon",
+    "CAP",
+    "Angular",
+    "Schematic"
   ],
   "author": "Diego SanMo",
   "url": "https://github.com/DiegoSanMo",

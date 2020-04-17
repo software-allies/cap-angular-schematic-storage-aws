@@ -63,9 +63,7 @@ export function capAngularSchematicStorageAws(_options: any): Rule {
 export function addPackageJsonDependencies(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [
-      { type: NodeDependencyType.Default, version: '~3.0.3', name: 'cap-storage-aws' },
-      // { type: NodeDependencyType.Default, version: '~8.0.8', name: 'ngx-file-drop' },
-      // { type: NodeDependencyType.Default, version: '~13.5.0', name: '@types/node' },
+      { type: NodeDependencyType.Default, version: '~3.0.5', name: 'cap-storage-aws' },
     ];
 
     dependencies.forEach(dependency => {
@@ -130,7 +128,8 @@ export function addToRootModule(host: Tree, modulePath: string, moduleName: stri
         accessKeyId: '${options.accessKeyId}',
         secretAccessKey: '${options.secretAccessKey}',
         region: '${options.region}',
-        folder: '${options.folder}'
+        folder: '${options.folder}',
+        endpoint: '${options.endpoint}'
         })`;
     }
     recorder.insertLeft(change.pos, change.toAdd);

@@ -2,7 +2,17 @@
 
 **CAP STORAGE AWS Schematic** is a schematic for **Angular**, this schematic allows you to upload images using **AWS S3**.
 
-## **Previous requirements**
+## Table of Contents
+
+* [Requirements](#Requirements)
+* [Installation](#Installation)
+* [Implementation into a module](#Use)
+* [Configuration AWS S3](#Configuration)
+* [Tags](#Tags)
+* [Inputs](#Inputs)
+* [Services](#Services)
+
+## **Requirements**
 
 **CAP STORAGE AWS** use bootstrap's classes. To be able to display the component in the right way, bootstrap should have been installed in the project. In case you don't have bootstrap installed, you can run the following command or read their [documentation](https://getbootstrap.com/docs/4.3/getting-started/download/):
 
@@ -40,7 +50,7 @@ ng add cap-angular-schematic-storage-aws
 
 ```
 
-## **AWS S3 Configuration**
+## **Configuration**
 
 We recommend creating a specific folder into your bucket to save your images. Into your bucket go to **permissions'** sections, after that, go to **CORS configuration** and write the following code:
 
@@ -59,7 +69,7 @@ We recommend creating a specific folder into your bucket to save your images. In
 </CORSConfiguration>
 ```
 
-## **HTML tags**
+## **Tags**
 
 ## **Cap Upload**
 Tag to upload images into an Amazon bucket.
@@ -84,6 +94,114 @@ Tag to upload any kind of file
 ```
 
 ![Alt text](https://github.com/software-allies/cap-storage-aws/raw/feature/cap-aws-angular/assets/images/cap-aws-drag-drop.gif?raw=true "example")
+
+## **Inputs**
+
+**fields**
+| Param | Description |
+| --- | --- |
+| name | It's the name of the field that makes reference on your DB.|
+| association | It's the reference of the data exposed for the module, it could be **id**, **name** or **url**. In case that you don't want an assosiation with data exposed you could use **none**.|
+| value | Value or the field that has 'none' association.|
+
+ 
+*Structure*: 
+
+``` 
+[
+  {
+    name: string;
+    association: string;
+    value?: any;
+  }
+]
+```
+
+**Example**
+
+app.component.html
+
+``` 
+<cap-upload [fields]="dbFields"></cap-upload>
+
+<cap-upload-drag-drop [fields]="dbFields"></cap-upload-drag-drop>
+```
+
+app.component.ts
+
+``` 
+let aux: IDbFields[] = [
+      {
+        name: 'SACAP__UUID__c',
+        association: 'id'
+      },
+      {
+        name: 'SACAP__URL__c',
+        association: 'url',
+      },
+      {
+        name: 'SACAP__Name__c',
+        association: 'name',
+      },
+      {
+        name: 'SACAP__CAP_User__c__SACAP__UUID__c',
+        association: 'none',
+        value: '12'
+      },
+    ]
+    this.dbFields = [...aux]
+```
+
+**token**
+| Param | Description |
+| --- | --- |
+| token | Recives the token to make the http request.|
+
+**Example**
+
+app.component.html
+
+``` 
+<cap-upload [token]="token"></cap-upload>
+
+<cap-upload-drag-drop [token]="token"></cap-upload-drag-drop>
+```
+
+**localStorageRef**
+| Param | Description |
+| --- | --- |
+| key | Object name's that has the credentials saved into the localStorage.|
+| reference | Property name's that makes reference to the token.|
+
+ 
+*Structure*: 
+
+``` 
+{
+  key: string;
+  reference: string;
+}
+```
+
+**Example**
+
+app.component.html
+
+``` 
+<cap-upload [localStorageRef]="localStorage"></cap-upload>
+
+<cap-upload-drag-drop [localStorageRef]="localStorage"></cap-upload-drag-drop>
+```
+
+app.component.ts
+
+``` 
+localStorage: ILocalStorage = {
+    key: 'User',
+    reference: 'token'
+};
+```
+
 
 ## **Services**
 
