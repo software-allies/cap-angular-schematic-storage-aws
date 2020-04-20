@@ -48,6 +48,15 @@
         "$source": "argv",
         "index": 4
       }
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "Endpoint to connect",
+      "x-prompt": "Endpoint: ",
+      "$default": {
+        "$source": "argv",
+        "index": 5
+      }
     }
   },
   "required": [
@@ -55,6 +64,7 @@
     "accessKeyId",
     "secretAccessKey",
     "region",
-    "folder"
+    "folder",
+    "endpoint"
   ]
 }

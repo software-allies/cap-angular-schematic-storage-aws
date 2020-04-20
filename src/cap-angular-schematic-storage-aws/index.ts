@@ -9,7 +9,6 @@ import {
 } from 'schematics-utilities';
 import { getProjectMainFile, getSourceFile } from 'schematics-utilities/dist/cdk';
 import { normalize, join } from '@angular-devkit/core';
-// import { InsertChange } from '@schematics/angular/utility/change';
 
 export function setupOptions(host: Tree, options: any): Tree {
   const workspace = getWorkspace(host);
@@ -63,7 +62,7 @@ export function capAngularSchematicStorageAws(_options: any): Rule {
 export function addPackageJsonDependencies(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [
-      { type: NodeDependencyType.Default, version: '~3.0.5', name: 'cap-storage-aws' },
+      { type: NodeDependencyType.Default, version: '~3.0.6', name: 'cap-storage-aws' },
     ];
 
     dependencies.forEach(dependency => {
