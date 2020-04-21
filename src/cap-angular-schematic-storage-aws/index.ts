@@ -62,7 +62,7 @@ export function capAngularSchematicStorageAws(_options: any): Rule {
 export function addPackageJsonDependencies(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [
-      { type: NodeDependencyType.Default, version: '~3.0.6', name: 'cap-storage-aws' },
+      { type: NodeDependencyType.Default, version: '~3.0.7', name: 'cap-storage-aws' },
     ];
 
     dependencies.forEach(dependency => {
