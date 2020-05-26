@@ -9,6 +9,7 @@ import {
 } from 'schematics-utilities';
 import { getProjectMainFile, getSourceFile } from 'schematics-utilities/dist/cdk';
 import { normalize, join } from '@angular-devkit/core';
+import * as cap_utilities from '../../../../cap-utilities/dist/index';
 // import { InsertChange } from '@schematics/angular/utility/change';
 
 export function setupOptions(host: Tree, options: any): Tree {
@@ -97,6 +98,33 @@ function addModuleToImports(options: any): Rule {
     const modulePath = getAppModulePath(host, getProjectMainFile(project));
     const moduleName = 'CapStorageAWS';
     addToRootModule(host, modulePath, moduleName, 'cap-storage-aws', options)
+
+    cap_utilities.addModuleWithForRootVars(host, {
+      name: 'CapStorageAWS',
+      path: `'${options.path}'`,
+      forRootVakues: [
+        {
+          name: 'bucket',
+          value: `${options.bucket}`
+        },
+        {
+          name: 'accessKeyId',
+          value: `${options.accessKeyId}`
+        },
+        {
+          name: 'secretAccessKey',
+          value: `${options.secretAccessKey}`
+        },
+        {
+          name: 'region',
+          value: `${options.region}`
+        },
+        {
+          name: 'folder',
+          value: `${options.folder}`
+        }
+      ]
+    }, options.path)
     return host;
   };
 }
