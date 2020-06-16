@@ -1,6 +1,6 @@
 {
   "name": "cap-angular-schematic-storage-aws",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Schematics to upload images using AWS S3.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
