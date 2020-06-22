@@ -7,8 +7,8 @@ import {
 import { SchemaI } from './schema';
 import { NodeDependencyType } from 'schematics-utilities';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import * as cap_utilities from 'cap-utilities';
-
+// import * as cap_utilities from 'cap-utilities';
+import * as cap_utilities from '../../../../cap-utilities/dist/utils';
 
 function addGlobalToPolyfills() {
   return (tree: Tree) => cap_utilities.addToPolyfillsFile(tree, '(window as any).global = window;');
@@ -22,7 +22,33 @@ export function capAngularSchematicStorageAws(_options: SchemaI): any {
 
 export function addPackageJsonDependencies(): Rule {
   return (host: Tree) => {
-    cap_utilities.addPackageToPackageJson(host, NodeDependencyType.Default, 'cap-storage-aws', '~3.0.3')
+    cap_utilities.addPackageToPackageJson(host, [
+      {
+        type: NodeDependencyType.Default,
+        pkg: 'cap-storage-aws',
+        version: '~3.0.3'
+      },
+      {
+        type: NodeDependencyType.Default,
+        pkg: 'aws-sdk',
+        version: '~2.701.0'
+      },
+      {
+        type: NodeDependencyType.Default,
+        pkg: 'ngx-file-drop',
+        version: '~9.0.1'
+      },
+      {
+        type: NodeDependencyType.Default,
+        pkg: 'sweetalert2',
+        version: '~9.15.1'
+      },{
+        type: NodeDependencyType.Default,
+        pkg: 'uuid',
+        version: '~8.1.0'
+      }
+    ])
+    // cap_utilities.addPackageToPackageJson(host, NodeDependencyType.Default, 'cap-storage-aws', '~3.0.3')
     return host;
   };
 }
@@ -37,11 +63,12 @@ export function installPackageJsonDependencies(): Rule {
 
 function addModuleToImports(options: SchemaI): Rule {
   return (host: Tree) => cap_utilities.addToNgModule(host, options,
-      [{
-        name: 'CapStorageAWS',
-        path: `cap-storage-aws`,
-        type: 'module',
-        forRootValues: [
+    [{
+      name: 'CapStorageAWS',
+      path: `cap-storage-aws`,
+      type: 'module',
+      forRootValues: {
+        params: [
           {
             name: 'bucket',
             value: `${options.bucket}`
@@ -63,8 +90,9 @@ function addModuleToImports(options: SchemaI): Rule {
             value: `${options.folder}`
           }
         ]
-      }]
-    )
+      }
+    }]
+  )
 }
 
 export default function (options: SchemaI): Rule {
