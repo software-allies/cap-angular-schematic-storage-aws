@@ -7,8 +7,7 @@ import {
 import { SchemaI } from './schema';
 import { NodeDependencyType } from 'schematics-utilities';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-// import * as cap_utilities from 'cap-utilities';
-import * as cap_utilities from '../../../../cap-utilities/dist/utils';
+import * as cap_utilities from 'cap-utilities';
 
 function addGlobalToPolyfills() {
   return (tree: Tree) => cap_utilities.addToPolyfillsFile(tree, '(window as any).global = window;');
@@ -48,7 +47,6 @@ export function addPackageJsonDependencies(): Rule {
         version: '~8.1.0'
       }
     ])
-    // cap_utilities.addPackageToPackageJson(host, NodeDependencyType.Default, 'cap-storage-aws', '~3.0.3')
     return host;
   };
 }
