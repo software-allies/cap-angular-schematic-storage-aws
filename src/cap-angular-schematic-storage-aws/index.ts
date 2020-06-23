@@ -35,7 +35,7 @@ export function addPackageJsonDependencies(): Rule {
       {
         type: NodeDependencyType.Default,
         pkg: 'ngx-file-drop',
-        version: '~9.0.1'
+        version: '^8.0.0'
       },
       {
         type: NodeDependencyType.Default,
